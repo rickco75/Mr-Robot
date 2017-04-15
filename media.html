@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script type="text/javascript" src="bower_components\jquery\dist\jquery.js">
+
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar-background">
+          <ul>
+            <li><a class="navlink" href="index.html">Home</a></li>
+            <li><a class="navlink" href="robots.html">Robots</a></li>
+            <li><a class="navlink" href="computers.html">Hardware</a></li>
+            <li><a class="navlink" href="contact.html">Contact</a></li>
+            <li><a class="navlink active" href="media.html">Media</a></li>
+            <li><a class="navlink" href="about.html">About</a></li>
+          </ul>
+      </nav>
+  </header>
+ <h1>MEDIA</h1>
+<video  width="320" controls="true">
+    <source src="media/big_buck_bunny.mp4" /><!-- Serve first for iPad -->
+    <source src="media/big_buck_bunny.ogv" />
+    <source src="media/big_buck_bunny.webm" />
+</video>
+<span class="btn-mini">Video courtesy of
+    <a href="http://www.bigbuckbunny.org/">Big Buck Bunny</a></span>
+<hr />
+<h4>Audio</h4>
+<audio controls="false">
+    <source src="media/PolymorphicPodcast-clip.mp3" />
+    <source src="media/PolymorphicPodcast-clip.ogg" />
+    <source src="media/PolymorphicPodcast-clip.wav" />
+</audio>
+<h4>Video</h4>
+<video  width="320">
+  <source src="media/big_buck_bunny.mp4" /><!-- Serve first for iPad -->
+  <source src="media/big_buck_bunny.ogv" />
+  <source src="media/big_buck_bunny.webm" />
+</video>
+<span class="btn-mini">Video courtesy of
+  <a href="http://www.bigbuckbunny.org/">Big Buck Bunny</a></span>
+<hr />
+<h4>Audio</h4>
+<audio controls="false">
+  <source src="media/PolymorphicPodcast-clip.mp3" />
+  <source src="media/PolymorphicPodcast-clip.ogg" />
+  <source src="media/PolymorphicPodcast-clip.wav" />
+</audio>
+/* Controls and Loop example */
+<h4>Video</h4>
+<video controls loop width="320">
+    <source src="media/big_buck_bunny.mp4" /><!-- Serve first for iPad -->
+    <source src="media/big_buck_bunny.ogv" />
+    <source src="media/big_buck_bunny.webm" />
+</video>
+<span class="btn-mini">Video courtesy of
+    <a href="http://www.bigbuckbunny.org/">Big Buck Bunny</a></span>
+<hr />
+<h4>Audio</h4>
+<audio controls="true">
+    <source src="media/PolymorphicPodcast-clip.mp3" />
+    <source src="media/PolymorphicPodcast-clip.ogg" />
+    <source src="media/PolymorphicPodcast-clip.wav" />
+</audio>
+/* Poster example */
+ <video controls loop preload poster="images/robot1.png" width="320">
+    <source src="media/big_buck_bunny.mp4" /><!-- Serve first for iPad -->
+    <source src="media/big_buck_bunny.ogv" />
+    <source src="media/big_buck_bunny.webm" />
+</video>
+/*Fallback Example */
+ <video controls loop preload poster="images/robot1.png" width="320">
+    <source src="media/big_buck_bunny.mp4" /><!-- Serve first for iPad -->
+    <source src="media/big_buck_bunny.ogv" />
+    <source src="media/big_buck_bunny.webm" />
+  <!-- Here you can put HTML to Alert user to use a different Browser -->
+    <p>This Browser does not Support Video</p>
+    <!-- Or Here you could put a flashplayer -->
+</video>
+/* Scripted Control Example */
+<video id="vid" poster="images/robot1.png" width="320">
+      <source src="media/big_buck_bunny.mp4" type="video/mp4" />
+      <source src="media/big_buck_bunny.ogv" type="video/ogg" />
+      <source src="media/big_buck_bunny.webm" type="video/webm" />
+</video>
+<div>
+    <input type="range"
+           id="scrubber"
+           min="0" max="60"
+           value="0" step="1"  />
+    <span id="remainingTime">0:00</span> /
+    <span id="totalTime">0:00</span>
+</div>
+<div>
+    <button class="btn" id="playPause">Play</button>
+    <button class="btn" id="stop">Stop</button>
+    <button class="btn" id="begin">&lt;&lt;</button>
+    <button class="btn" id="rewind">&lt;</button>
+    <button class="btn" id="fastForward">&gt;</button>
+    <button class="btn" id="end">&gt;&gt;</button>
+</div>
+<div>
+    <input type="range" id="volume" min="0" step="0.1" max="1" />
+    <button class="btn" id="mute">Mute</button>
+</div>
+<div>
+    Speed <input type="range"
+                 id="playbackRate"
+                 min="1" value="1"
+                 step="1" max="4" />
+</div>
+/*Dynamic Loading Example */
+<video id="vid" data-firstfile="http://techslides.com/demos/sample-videos/small" data-secondfile="media/big_buck_bunny" controls width="320">
+    <source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4" />
+    <source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg" />
+    <source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm" />
+</video>
+<script type="text/javascript">
+  /*  */
+$(function() {
+    let $video = $('#vid');
+    $video.on('play', function() {
+        if (!$video.is(':visible')) {
+            $video.fadeIn();
+        }
+    });
+    $video.on('ended', function() {
+        let video = this,
+            sources = video.getElementsByTagName('source'),
+            oldFileName = $video.attr('data-firstfile'),
+            newFileName = $video.attr('data-secondfile'),
+            forEach = Array.prototype.forEach;
+        // check to see if the last video is not loaded
+        if(sources[0].src.indexOf(newFileName) === -1){
+            alert('source.src');
+            forEach.call(sources, function(source) {
+                source.src =source.src.replace(oldFileName,newFileName);
+            });
+            $video.fadeOut(function() {
+                video.load();
+                video.play();
+            });
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+  /*  */
+  $(function() {
+      let video = document.querySelector('#vid'),
+                  remainingTime = $('#remainingTime'),
+                  totalTime = $('#totalTime'),
+                  playPause = $('#playPause'),
+                  stop = $('#stop'),
+                  rewind = $('#rewind'),
+                  begin = $('#begin'),
+                  end = $('#end'),
+                  fastForward = $('#fastForward'),
+                  volume = $('#volume'),
+                  mute = $('#mute'),
+                  scrubber = $('#scrubber'),
+                  playbackRate = $('#playbackRate'),
+                  TIME_STEP = 5,
+                  formatTime = function(seconds) {
+                      seconds = Math.round(seconds);
+                      var minutes = 0;
+                      if (seconds >= 60) {
+                          minutes = Math.floor(seconds / 60);
+                          seconds = (seconds - (minutes * 60));
+                      }
+                      seconds = seconds + '';
+                      if (seconds.length == 1) {
+                          seconds = '0' + seconds;
+                      }
+                      return minutes + ':' + seconds;
+                  };
+      playPause.click(function() {
+          if (video.paused || video.ended) {
+              video.play();
+              playPause.text('Pause');
+          }
+          else {
+              video.pause();
+              playPause.text('Play');
+          }
+      });
+      stop.click(function() {
+          video.pause();
+          video.currentTime = 0;
+          playPause.text('Play');
+          video.playbackRate = 1;
+          playbackRate.val(1);
+      });
+      begin.click(function() {
+          video.currentTime = 0;
+      });
+      rewind.click(function() {
+          video.currentTime -= TIME_STEP;
+      });
+      fastForward.click(function() {
+          video.currentTime += TIME_STEP;
+      });
+      end.click(function() {
+          video.currentTime = video.duration;
+          playPause.text('Play');
+      });
+      volume.change(function() {
+          video.volume = this.value;
+      });
+      var vol = 0;
+      mute.click(function() {
+          if (!video.muted) {
+              vol = volume.val();
+          }
+          video.muted = !video.muted;
+          if (!video.muted) {
+              volume.val(vol);
+              mute.text('Mute');
+          }
+          else {
+              volume.val(0);
+              mute.text('Unmute');
+          }
+      });
+      scrubber.change(function() {
+          video.currentTime = this.value;
+      });
+      playbackRate.change(function() {
+          video.playbackRate = this.value;
+      });
+      video.addEventListener('play', function() {
+          totalTime.text(formatTime(video.duration));
+      });
+      video.addEventListener('timeupdate', function() {
+          remainingTime.text(
+              formatTime(video.currentTime));
+          scrubber.val(video.currentTime);
+      });
+    });
+</script>
+  </body>
+</html>

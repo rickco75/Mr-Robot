@@ -1,0 +1,49 @@
+// #firstDiv {
+//   background-color: green;
+//   color:white;
+//   margin: 7em;
+// border: .5em inset;
+// }
+
+@background-color-p: red;
+@text-color-p: #1A237E;
+@text-align-p: center;
+@font-weight-p: bold;
+@font-size-p: 2em;
+@border-radius-p: 60%;
+@padding-p: 10px;
+@font-style-p: italic;
+
+p{
+  background-color: @background-color-p;
+  color: @text-color-p;
+  padding: @padding-p;
+  border-radius: @border-radius-p;
+  text-align: @text-align-p;
+  font-weight:@font-weight-p;
+  font-size: @font-size-p;
+  font-style: @font-style-p;
+}
+p.p1{
+  background-color: @background-color-p;
+  color: green;
+  padding: @padding-p;
+  border-radius: @border-radius-p;
+  text-align: @text-align-p;
+  font-weight:@font-weight-p;
+  font-size: @font-size-p;
+  font-style: @font-style-p;
+}
+p.p2{
+  background-color: @background-color-p;
+  color: yellow;
+  padding: 75px;
+  border-radius: @border-radius-p;
+  text-align:center;
+  font-weight:@font-weight-p;
+  font-size: @font-size-p;
+  font-style: @font-style-p;
+}
+#c1{
+  color:red;
+}
